@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="public/logo_tab_icon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Styles for correct work of the polyfil on touch-screens -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mobile-drag-drop@2.3.0/default.css">
+
+  <!-- Our styles -->
+  <link rel="stylesheet" href="src/reset.css">
+  <link rel="stylesheet" href="src/style.css">
+  <title>My Dashboard</title>
+</head>
+
+<body>
+  <!-- Main body -->
+  <div class="wrapper">
+
+
+    <!-- Mobile burger menu -->
+    <div class="mobile_menu">
+      <img src="public/logo_tab_icon.svg" alt="Logo" class="header_logo">
+
+      <input type="checkbox" id="hamburger-toggle">
+      <label for="hamburger-toggle" id="hamburger">
+        <span class="slice"></span>
+        <span class="slice"></span>
+        <span class="slice"></span>
+      </label>
+
+
+      <nav id="mobile_nav">
+        <ul>
+          <li>
+            <a href="/home">
+              <img src="public/home_logo.svg" alt="Tasks Icon" class="nav_icon">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/kanban">
+              <img src="public/tasks_logo.svg" alt="Tasks Icon" class="nav_icon">
+              Tasks
+            </a>
+          </li>
+          <li>
+            <a href="/budget">
+              <img src="public/budget_logo.svg" alt="Budget Icon" class="nav_icon">
+              Budget Tracker
+            </a>
+          </li>
+
+          <li style="width: 100%;">
+            <button class="open_search_modal_btn">Search...</button>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Side menu on big screens -->
+    <aside class="header_aside">
+      <img src="public/logo_tab_icon.svg" alt="Logo" class="header_logo">
+      <nav>
+        <ul>
+          <li>
+            <a href="/home">
+              <img src="public/home_logo.svg" alt="Tasks Icon" class="nav_icon">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/kanban">
+              <img src="public/tasks_logo.svg" alt="Tasks Icon" class="nav_icon">
+              Tasks
+            </a>
+          </li>
+          <li>
+            <a href="/budget">
+              <img src="public/budget_logo.svg" alt="Budget Icon" class="nav_icon">
+              Budget Tracker
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <button class="open_search_modal_btn">Search...</button>
+
+      <!-- Switch theme button -->
+      <label class="switch_theme">
+        <input type="checkbox">
+        <span class="switch_move"></span>
+      </label>
+    </aside>
+
+    <!-- Main block where all elements will be inserted by switching the pages(Home, KanBan, Budget)-->
+    <main class="app_root">
+
+    </main>
+
+  </div>
+
+
+
+  <!-- Modal windows -->
+
+  <!-- Search modal -->
+  <div class="search_overlay">
+    <div class="search_modal">
+
+
+      <div class="search_params">
+        <input type="text" placeholder="Tasks and budget search..." class="search_input">
+
+        <div class="datepicker_block">
+          <!--Не смог правильно реализовать в css, загуглил многое но так и не нашел нормальный рабочий вариант,  надо чтобы вместо браузерной иконки была моя иконка, и плюс красиво стилизовать сам input date, красивые числа и фон-->
+          <input type="date" class="datepicker_input" id="search_date_input">
+          <img src="./public/calendar-svgrepo-com.svg" alt="calendar icon" class="datepicker_icon">
+        </div>
+      </div>
+
+      <ul class="search_results">
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modal with adding new task -->
+  <div class="add_task_modal_overlay">
+    <div class="add_task_modal">
+
+      <div class="close_btn"> <img src="./public/close-x-svgrepo-com.svg" alt="close button"> </div>
+
+      <h1>New Task</h1>
+      <input type="text" id="add_task_title" placeholder="Title..." required>
+      <textarea name="" id="add_task_description" placeholder="Description"></textarea>
+
+      <div class="dependencies_add_block">
+        <h3>Depends on: </h3>
+        <div class="dependencies_list">
+
+        </div>
+      </div>
+
+      <div class="add_task_buttons">
+        <button class="cancel_to_add_task_btn | add_task_modal_button">Cancel</button>
+        <button class="confirm_to_add_task_btn | add_task_modal_button">Confirm</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal where we can make changes in our tasks -->
+  <div class="edit_task_overlay">
+    <div class="edit_task_modal">
+      <h1>Edit Task</h1>
+      <input type="text" id="edit_task_title" placeholder="Title...">
+
+      <textarea id="edit_task_desc" placeholder="Description"></textarea>
+
+      <div id="edit_dependencies_list">
+        Depends on:
+      </div>
+
+      <!-- Text which appears when there is a loop in tasks dependencies -->
+      <p id="cycle_error_msg"
+        style="color: #ff4d4d; font-size: 1.3rem; margin-top: 10px; display: none; text-align: center;"></p>
+
+      <div class="edit_task_btns">
+        <button class="cancel_edit_task_btn | edit_task_btn">Cancel</button>
+        <button class="save_edit_task_btn | edit_task_btn">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Add transaction modal -->
+  <div class="add_transaction_overlay">
+    <div class="add_transaction_modal">
+      <h1>Add Transaction</h1>
+      <input type="text" id="transaction_title" placeholder="Title..." maxlength="20">
+
+      <textarea id="import_text" placeholder="Paste the text of the SMS or statement..."
+        class="transaction_text"></textarea>
+
+      <label class="custom_file_upload">
+        Custom Upload (.txt, .csv)
+        <input type="file" id="import_file" accept=".txt,.csv">
+
+        <img src="./public/file-search-svgrepo-com.svg" alt="">
+      </label>
+
+
+      <input type="number" class="transaction_number" placeholder="Expense/Income" min="0" max="9999999">
+
+      <select id="transaction_type_choice">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+
+
+      <input type="text" class="transaction_category_choice" placeholder="Category(Optional)" maxlength="15">
+
+      <div class="datepicker_block">
+        <input type="date" class="datepicker_input">
+        <img src="./public/calendar-svgrepo-com.svg" alt="calendar icon" class="datepicker_icon">
+      </div>
+
+
+      <div class="add_transaction_btns">
+        <button class="cancel_transaction | transaction_btn">Cancel</button>
+        <button class="save_transaction | transaction_btn">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
