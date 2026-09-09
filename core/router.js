@@ -184,6 +184,10 @@ export async function handleLocation() {
         mobileNav.classList.remove("active");
 }
 
+if (!window.location.hash) {
+    window.location.hash = "home";
+}
+
 await handleLocation();
 // Handle browser navigation (back/forward)
 window.addEventListener("hashchange", handleLocation);
