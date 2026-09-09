@@ -13,9 +13,9 @@ document.body.className = savedTheme;
 let switchThemeButton = document.querySelector(".switch_theme input");
 
 if (savedTheme === 'dark_theme') {
-    switchThemeButton.checked = false;
-} else {
     switchThemeButton.checked = true;
+} else {
+    switchThemeButton.checked = false;
 }
 
 switchThemeButton.addEventListener("click", (e) => {
