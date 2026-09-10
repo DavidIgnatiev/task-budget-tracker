@@ -3,12 +3,14 @@ import "../core/db.js";
 import "../core/search.js";
 import "../modules/kanban/kanban.js";
 import "../modules/budget/budget.js";
-
+import { updatePeakActivity } from "../modules/budget/budget.js";
 
 
 // Load and apply saved theme preference (dark / light)
 let savedTheme = localStorage.getItem("theme");
-document.body.className = savedTheme;
+if (savedTheme) {
+    document.body.className = savedTheme;
+}
 
 let switchThemeButton = document.querySelector(".switch_theme input");
 
@@ -20,7 +22,7 @@ if (savedTheme === 'dark_theme') {
 
 switchThemeButton.addEventListener("click", (e) => {
     document.body.classList.toggle("dark_theme");
-    localStorage.setItem("theme", document.body.classList);
+    localStorage.setItem("theme", document.body.classList.contains("dark_theme") ? "dark_theme" : "");
 });
 
 
