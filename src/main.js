@@ -12,17 +12,20 @@ if (savedTheme) {
     document.body.className = savedTheme;
 }
 
-let switchThemeButton = document.querySelector(".switch_theme input");
+let switchThemeButton = document.querySelectorAll(".switch_theme input");
+let isDarkSaved = savedTheme === "dark_theme";
 
-if (savedTheme === 'dark_theme') {
-    switchThemeButton.checked = true;
-} else {
-    switchThemeButton.checked = false;
-}
+switchThemeButton.forEach((btn) => {
+    btn.checked = isDarkSaved;
 
-switchThemeButton.addEventListener("click", (e) => {
-    document.body.classList.toggle("dark_theme");
-    localStorage.setItem("theme", document.body.classList.contains("dark_theme") ? "dark_theme" : "");
+    btn.addEventListener("change", () => {
+        let isDark = document.body.classList.toggle("dark_theme");
+        localStorage.setItem("theme", isDark ? "dark_theme" : "");
+
+        switchThemeButton.forEach((otherBtn) => {
+            otherBtn.checked = isDark;
+        });
+    });
 });
 
 
