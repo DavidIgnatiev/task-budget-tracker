@@ -357,7 +357,7 @@ export async function renderKanbanBoard() {
                 <p class="task_desc">${task.description}</p>
                 <div class="task_footer">
                     <span class="task_id">#${task.id.slice(-4)}</span>
-                    <button class="delete_task_btn"><img src="../../public/delete-forever-svgrepo-com.svg" alt="delete task btn"></button>
+                    <button class="delete_task_btn"><img src="./public/delete-forever-svgrepo-com.svg" alt="delete task btn"></button>
                 </div>
             </div>
         `;
