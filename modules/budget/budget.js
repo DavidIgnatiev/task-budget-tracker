@@ -272,7 +272,7 @@ function renderHistoryChunk(container) {
                 <div class="transaction_amounts">
                     <span class="transaction_money">${tx.type === 'income' ? '+' : '-'}${tx.amount}</span>
                     <button class="delete_transaction_btn" data-id="${tx.id}">
-                        <img src="../../public/delete-forever-svgrepo-com.svg" alt="delete">
+                        <img src="./public/delete-forever-svgrepo-com.svg" alt="delete">
                     </button>
                 </div>
             </div>
